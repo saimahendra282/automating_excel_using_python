@@ -1,10 +1,10 @@
-from openpyxl import load_workbook
+from openpyxl import load_workbook,Workbook
 from openpyxl.utils import get_column_letter
 
 # Load the workbook
 wb = load_workbook('sales_data.xlsx')
 ws = wb.active
-
+# wb = Workbook() if u wanna create a new workbook
 # Access cell A1 and print its value
 cell_value = ws['A1'].value
 print("Value of cell A1:", cell_value)
@@ -21,7 +21,7 @@ for cell in ws['G']:
         try:
             total_cost += float(cell.value)
         except ValueError:
-            pass  # Ignore non-numeric values
+            pass  
 print("Total everyone's total cost:", total_cost)
 # Finding the average of the values in a specific column (column G)
 column_to_average = 'G'
@@ -74,6 +74,10 @@ end_row = 1
 end_column = 5
 ws.unmerge_cells(start_row=start_row, start_column=start_column,
                end_row=end_row, end_column=end_column)
-
+# creting a new worksheet
+wb.create_sheet("Testing")
+print(wb.worksheets) # to check if worksheet is created
+# wb.save('Test.xlsx') IN CASE IF U WANNA CREATE A NEW WORKBOOK
+# PENDING TASKS CODE TO MOVE AND COPY CELLS 
 wb.save('sales_data.xlsx')
 print("Data modified successfully")
